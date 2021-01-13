@@ -1,0 +1,3 @@
+<?php
+
+excho "hello world";
