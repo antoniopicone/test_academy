@@ -19,6 +19,10 @@ jobs:
             IdentityFile ~/.ssh/gcp_ssh_key
             StrictHostKeyChecking no
           END
+        env:
+          GCP_SSH_USER: ${{ secrets.GCP_SSH_USER }}
+          GCP_SSH_KEY: ${{ secrets.GCP_SSH_KEY }}
+          GCP_SSH_IP: ${{ secrets.GCP_SSH_IP }}
           
       - name: SSH into the server
         run: |
