@@ -4,21 +4,15 @@ on:
 jobs:
   my_job:
     name: deploy to staging
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     steps:
-    - uses: 'actions/checkout@v3'
-    
-    - id: 'auth'
-      uses: 'google-github-actions/auth@v0'
-      with:
-        credentials_json: '${{ secrets.VM_SERVICEACC_1 }}'
-
-    - id: 'compute-ssh'
-      uses: 'google-github-actions/ssh-compute@v0'
-      with:
-        instance_name: 'instance-1'
-        zone: 'us-central1-a'
-        ssh_private_key: '${{ secrets.GCP_SSH_PRIVATE_KEY }}'
-        command: 'echo ciao'
-        
+    - name: Create priv key file on temporary VM
+        run:|
+          mkdir -p ~/.ssh/
+          echo "$GCP_SSH_KEY" > ~/.ssh/gcp_ssh_key
+          chmod 600 ~/.ssh/gcp_ssh_key
+          
+    - name: SSH into the server
+        run:|
+          ssh -i ~/.ssh/gcp_ssh_key ${{ secrets.GCP_SSH_USER }}@${{ secrets.GCP_SSH_IP }} 'ls -l'
