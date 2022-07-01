@@ -8,6 +8,11 @@ jobs:
 
     steps:
     - uses: 'actions/checkout@v2'
+    
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v0'
+      with:
+        credentials_json: '${{ secrets.VM_SERVICEACC_1 }}'
 
     - id: 'compute-ssh'
       uses: 'google-github-actions/ssh-compute@v0'
