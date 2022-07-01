@@ -14,6 +14,6 @@ jobs:
       with:
         credentials_json: '${{ secrets.VM_SERVICEACC_1 }}'
 
-    - id: echo'
+    - id: 'echo'
       name: Run a one-line script
       run: echo Hello, world!
