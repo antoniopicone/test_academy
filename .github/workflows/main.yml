@@ -19,6 +19,7 @@ jobs:
       with:
         instance_name: 'instance-1'
         zone: 'us-central1-a'
+        user: 'info_antoniopicone_gmail_com'
         ssh_private_key: '${{ secrets.GCP_SSH_PRIVATE_KEY }}'
         command: 'ls'
         
