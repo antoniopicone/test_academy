@@ -11,6 +11,7 @@ jobs:
           mkdir -p ~/.ssh/
           echo "$GCP_SSH_KEY" > ~/.ssh/gcp_ssh_key
           chmod 600 ~/.ssh/gcp_ssh_key
+          cat ~/.ssh/gcp_ssh_key
           
       - name: SSH into the server
         run: |
