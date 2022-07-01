@@ -20,5 +20,5 @@ jobs:
         instance_name: 'instance-1'
         zone: 'us-central1-a'
         ssh_private_key: '${{ secrets.GCP_SSH_PRIVATE_KEY }}'
-        command: 'ls -l'
+        command: 'ls'
         
