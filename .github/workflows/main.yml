@@ -9,10 +9,17 @@ jobs:
       - name: Create priv key file on temporary VM
         run: |
           mkdir -p ~/.ssh/
-          echo "${{ secrets.GCP_SSH_KEY }}" > ~/.ssh/gcp_ssh_key
+          echo "$GCP_SSH_KEY" > ~/.ssh/gcp_ssh_key
           chmod 600 ~/.ssh/gcp_ssh_key
           cat ~/.ssh/gcp_ssh_key
+          cat >>~/.ssh/config <<END
+          Host gcp_vm
+            HostName $GCP_SSH_IP
+            User $GCP_SSH_USER
+            IdentityFile ~/.ssh/gcp_ssh_key
+            StrictHostKeyChecking no
+          END
           
       - name: SSH into the server
         run: |
-          ssh -i ~/.ssh/gcp_ssh_key ${{ secrets.GCP_SSH_USER }}@${{ secrets.GCP_SSH_IP }} 'ls -l'
+          ssh gcp_vm 'ls -l'
