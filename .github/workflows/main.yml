@@ -6,7 +6,7 @@ jobs:
     name: "deploy to staging"
     runs-on: ubuntu-latest
     steps:
-      - name: Create priv key file on temporary VM
+      - name: Create SSH Config on temporary VM
         run: |
           mkdir -p ~/.ssh/
           echo "$GCP_SSH_KEY" > ~/.ssh/gcp_ssh_key
