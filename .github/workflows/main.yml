@@ -2,17 +2,16 @@ on:
   workflow_dispatch:
 
 jobs:
-  my_job:
-    name: deploy to staging
+  deploy:
+    name: "deploy to staging"
     runs-on: ubuntu-latest
-
     steps:
-    - name: Create priv key file on temporary VM
-        run:|
+      - name: Create priv key file on temporary VM
+        run: |
           mkdir -p ~/.ssh/
           echo "$GCP_SSH_KEY" > ~/.ssh/gcp_ssh_key
           chmod 600 ~/.ssh/gcp_ssh_key
           
-    - name: SSH into the server
-        run:|
+      - name: SSH into the server
+        run: |
           ssh -i ~/.ssh/gcp_ssh_key ${{ secrets.GCP_SSH_USER }}@${{ secrets.GCP_SSH_IP }} 'ls -l'
